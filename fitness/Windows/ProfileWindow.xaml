@@ -1,0 +1,133 @@
+﻿<Window x:Class="fitness.Windows.ProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="User Profile" Height="500" Width="900"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="20">
+        <StackPanel VerticalAlignment="Top">
+            <materialDesign:Card Padding="16" Margin="0 20 0 20"
+                   Background="{StaticResource PrimaryHueLightBrush}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="Профиль" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,40" Foreground="White"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        
+                    <StackPanel Orientation="Vertical" Margin="0 0 50 0">
+                        <!-- Имя -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                            <TextBlock Text="Имя" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                            <TextBox x:Name="NameTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             Margin="10 0 0 10"
+                                     Foreground="White"
+                             Width="250"/>
+                        </StackPanel>
+
+                        <!-- Фамилия -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                            <TextBlock Text="Фамилия" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                            <TextBox x:Name="LastNameTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             Margin="10 0 0 10"
+                                     Foreground="White"
+                                     
+                             Width="250"/>
+                        </StackPanel>
+
+                        <!-- Отчество -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                            <TextBlock Text="Отчество" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                            <TextBox x:Name="MiddleNameTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             Margin="10 0 0 10"
+                                     Foreground="White"
+                                     
+                             Width="250"/>
+                        </StackPanel>
+
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <!-- Электронная почта -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                                <TextBlock Text="Электронная почта" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                                <TextBox x:Name="EmailTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                                 IsReadOnly="True"
+                                 HorizontalAlignment="Center"
+                                 Margin="10 0 0 10"
+                                     Foreground="White"
+                                         
+                                 Width="250"/>
+                            </StackPanel>
+                            <!-- Номер телефона -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                            <TextBlock Text="Номер телефона" 
+                                Margin="0 10 0 5"
+                                FontSize="18"
+                                Foreground="White"
+                                TextAlignment="Center"/>
+                            <TextBox x:Name="PhoneTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                              IsReadOnly="True"
+                              HorizontalAlignment="Center"
+                              Margin="10 0 0 10"
+                                     Foreground="White"
+                                     
+                              Width="250"/>
+                        </StackPanel>
+
+                        <!-- Возраст -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                            <TextBlock Text="Возраст" 
+                                Margin="0 10 0 5"
+                                FontSize="18"
+                                Foreground="White"
+                                TextAlignment="Center"/>
+                            <TextBox x:Name="AgeTextBox" Style="{StaticResource MaterialDesignFilledTextBox}"
+                              IsReadOnly="True"
+                              HorizontalAlignment="Center"
+                              Margin="10 0 0 10"
+                                     Foreground="White"
+                                     
+                              Width="250"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Редактировать профиль"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,20,0"
+                    x:Name="profSettingsButton"
+                    Click="EditProfile_Click" />
+                <Button Content="Сменить пароль"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0"
+                    Click="ResetPassword_Click" />
+            </StackPanel>
+            <!-- Кнопка "Редактировать" -->
+
+        </StackPanel>
+    </Grid>
+</Window>

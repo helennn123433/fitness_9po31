@@ -1,0 +1,117 @@
+﻿<Page x:Class="fitness.Pages.DataPages.ManagersManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Title="Управление тренерами"
+      d:DesignWidth="800">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Менеджеры" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" Margin="0 0 0 20"/>
+        </StackPanel>
+        <!-- Панель управления -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 16" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="ActionBar">
+            <Button x:Name="AddButton" 
+                    Click="AddButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=TrainersDataGrid, 
+                  Converter={StaticResource BooleanToVisibilityConverter},
+                  ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Plus" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Добавить"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="EditButton" 
+                    Click="EditButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=TrainersDataGrid, 
+                      Converter={StaticResource BooleanToVisibilityConverter},
+                      ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Pencil" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Редактировать"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="DeleteButton" 
+                    Click="DeleteButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=TrainersDataGrid, 
+                  Converter={StaticResource BooleanToVisibilityConverter},
+                  ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Delete" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Удалить"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="ResetPasswordButton" 
+                    Click="ResetPasswordButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=TrainersDataGrid, 
+                      Converter={StaticResource BooleanToVisibilityConverter},
+                      ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PasswordReset" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Сбросить пароль"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <DataGrid x:Name="ManagersDataGrid" 
+                  Grid.Row="2"
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserResizeRows="True"
+                  materialDesign:DataGridAssist.CellPadding="16 8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="16 8"
+                  Background="{StaticResource PrimaryHueLightBrush}" Height="auto"
+                  >
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="ФИО" Width="*"
+                       HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                       >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="White">
+                                <Run Text="{Binding LastName}"/>
+                                <Run Text="{Binding FirstName}"/>
+                                <Run Text="{Binding MiddleName}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Телефон" 
+                                    Binding="{Binding PhoneNumber}" 
+                                    Width="*"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Foreground="White"
+                                    />
+
+                <DataGridTextColumn Header="Email" 
+                                    Binding="{Binding Email}" 
+                                    Width="*"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Foreground="White"
+                                    />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -1,0 +1,111 @@
+﻿<Page x:Class="fitness.Pages.DataPages.AbonementsManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      xmlns:conv="clr-namespace:fitness.Converters"
+      Title="Управление абонементами"
+      d:DesignWidth="800">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <conv:FreezeDaysConverter x:Key="FreezeDaysConverter"/>
+    </Page.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Абонементы" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" Margin="0 0 0 20"/>
+        </StackPanel>
+        <!-- Панель управления -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 16" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="ActionBar">
+            <Button x:Name="AddButton" 
+                    Click="AddButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+                  Converter={StaticResource BooleanToVisibilityConverter},
+                  ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Plus" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Добавить"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="EditButton" 
+                    Click="EditButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+                      Converter={StaticResource BooleanToVisibilityConverter},
+                      ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Pencil" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Редактировать"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="DeleteButton" 
+                    Click="DeleteButton_Click"
+                    Margin="0 0 8 0"
+                    IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+                  Converter={StaticResource BooleanToVisibilityConverter},
+                  ConverterParameter=Inverse}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Delete" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Удалить"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- Таблица абонементов -->
+        <DataGrid x:Name="AbonementsDataGrid" 
+                  Grid.Row="2"
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserResizeRows="True"
+                  materialDesign:DataGridAssist.CellPadding="16 8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="16 8"
+                  Background="{StaticResource PrimaryHueLightBrush}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" 
+                                    Binding="{Binding AbonementName}" 
+                                    Width="auto"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Foreground="White"/>
+
+                <DataGridTextColumn Header="Цена" 
+                                    Binding="{Binding AbonementPrice, StringFormat='{}{0} ₽'}" 
+                                    Width="Auto"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Foreground="White"/>
+
+                <DataGridTextColumn Header="Срок (дней)" 
+                                    Binding="{Binding AbonementLong}" 
+                                    Width="Auto"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    CellStyle="{StaticResource WrapTextCellStyle}"
+                                    Foreground="White"/>
+
+                <DataGridTextColumn Header="Заморозка" 
+                                    Binding="{Binding AbonementFreeze, Converter={StaticResource FreezeDaysConverter}}"
+                                    Width="Auto"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    CellStyle="{StaticResource WrapTextCellStyle}"
+                                    Foreground="White"/>
+
+                <DataGridTextColumn Header="Описание"
+                                    Binding="{Binding AbonementDescription}" 
+                                    Width="2*"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Foreground="White"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

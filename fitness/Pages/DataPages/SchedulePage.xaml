@@ -1,0 +1,220 @@
+﻿<Page x:Class="fitness.Pages.DataPages.SchedulePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      Title="Расписание">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+    <Grid Name="MainGrid" Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Расписание" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" Margin="0 0 0 20"/>
+        </StackPanel>
+
+        <!-- Переключатель недель -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" 
+                   HorizontalAlignment="Center" Margin="0 0 0 16">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="PrevWeekButton" Click="PrevWeekButton_Click"
+         Margin="0 0 8 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ChevronLeft" Margin="0 0 4 0"/>
+                        <TextBlock Text="Предыдущая неделя"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="CurrentWeekButton" Click="CurrentWeekButton_Click"
+         Margin="0 0 8 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CalendarToday" Margin="0 0 4 0"/>
+                        <TextBlock Text="Текущая неделя"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="NextWeekButton" Click="NextWeekButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Следующая неделя" Margin="0 0 4 0"/>
+                        <materialDesign:PackIcon Kind="ChevronRight"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <TextBlock x:Name="WeekRangeText" Margin="0 16 0 0" 
+                      VerticalAlignment="Center" FontWeight="Bold"
+                       FontSize="16"
+                      HorizontalAlignment="Center"
+                      Foreground="{StaticResource PrimaryHueMidBrush}"/>
+           
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 16" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="ActionBar">
+                <Button x:Name="AddButton" 
+                Click="AddButton_Click"
+                Margin="0 0 8 0"
+                IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+              Converter={StaticResource BooleanToVisibilityConverter},
+              ConverterParameter=Inverse}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Plus" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Добавить"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="EditButton" 
+                Click="EditButton_Click"
+                Margin="0 0 8 0"
+                IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+                  Converter={StaticResource BooleanToVisibilityConverter},
+                  ConverterParameter=Inverse}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Pencil" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Редактировать"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="DeleteButton" 
+                Click="DeleteButton_Click"
+                Margin="0 0 8 0"
+                IsEnabled="{Binding SelectedItem, ElementName=AbonementsDataGrid, 
+              Converter={StaticResource BooleanToVisibilityConverter},
+              ConverterParameter=Inverse}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Delete" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Удалить"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0 0 0 16" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <!-- Тип занятия -->
+                    <StackPanel Orientation="Vertical" Margin="0 0 20 0">
+                        <TextBlock Text="Тип занятия" FontWeight="SemiBold" Margin="0 0 0 4" FontSize="16" Foreground="{StaticResource PrimaryHueMidBrush}"/>
+                        <ComboBox Width="200" SelectedItem="{Binding SelectedActivityType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ActivityTypes}" x:Name="lessonTypesComboBox" SelectionChanged="lessonTypesComboBox_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                <TextBlock Text="{Binding TypeLessonName}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Тренер -->
+                    <StackPanel Orientation="Vertical" Margin="0 0 20 0">
+                    <TextBlock Text="Тренер" FontWeight="SemiBold" Margin="0 0 0 4" FontSize="16" Foreground="{StaticResource PrimaryHueMidBrush}"/>
+                    <ComboBox Width="200" SelectedItem="{Binding SelectedTrainer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Trainers}" x:Name="trainersComboBox" SelectionChanged="trainersComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding LastName}"/>
+                                    <Run Text="{Binding FirstName}"/>
+                                    <Run Text="{Binding MiddleName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    </StackPanel>
+                <Button Content="Сбросить фильтры" Click="ResetFilters_Click" Margin="0 0 20 0"/>
+                <Button x:Name="ExportToExcelButton"
+                    Click="ExportToExcelButton_Click"
+                    Margin="0 0 8 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FileExcel" Margin="0 0 4 0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Открыть в Excel"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Header with days -->
+        <Grid Grid.Row="3" Name="HeaderGrid" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Время" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="1" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Понедельник" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="2" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Вторник" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="3" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Среда" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="4" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Четверг" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="5" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Пятница" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="6" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Суббота" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+
+            <Border Grid.Column="7" Background="{StaticResource PrimaryHueLightBrush}" BorderThickness="0,0,1,1">
+                <TextBlock Text="Воскресенье" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" TextWrapping="Wrap" Foreground="White"/>
+            </Border>
+        </Grid>
+
+        <!-- Schedule content -->
+        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0 0 -17 0">
+            <Grid Name="ScheduleGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Time column -->
+                <ItemsControl Name="TimeColumn" Grid.Column="0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Height="50" BorderBrush="Gray" BorderThickness="0,0,1,1">
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Schedule canvas -->
+                <Canvas Name="ScheduleCanvas" Grid.Column="1" Grid.ColumnSpan="7" 
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        Background="White"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

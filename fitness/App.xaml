@@ -1,0 +1,99 @@
+﻿<Application x:Class="fitness.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:fitness"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="LoginWindow.xaml"
+    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Grey" SecondaryColor="DeepOrange" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="Primary500">#757575</Color>
+            <Color x:Key="Secondary500">#E57373</Color>
+
+            <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FFF1ECEC" />
+            <SolidColorBrush x:Key="MaterialDesignBody" Color="White" />
+
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFB3B3B3" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#757575" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#616161" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White" />
+
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#E57373" />
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="White" />
+
+            <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+            </Style>
+
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+            </Style>
+            
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="materialDesign:HintAssist.Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Style>
+            
+            <Style x:Key="MaterialDesignThumb" TargetType="{x:Type Thumb}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Border x:Name="PART_Border" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="MaterialDesignGridColumnHeaderGripper" BasedOn="{StaticResource MaterialDesignThumb}" TargetType="{x:Type Thumb}">
+                <Setter Property="Cursor" Value="SizeWE"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Width" Value="8"/>
+            </Style>
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="materialDesign:HintAssist.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Style>
+
+            <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryHueLightBrush}" />
+                <!-- Здесь укажите нужный цвет -->
+            </Style>
+
+            <Style x:Key="WhiteCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="White" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Focusable" Value="False"/>
+            </Style>
+
+            <Style x:Key="WrapTextCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="TextBoxFilled" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFilledTextBox}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="CaretBrush" Value="White" />
+            </Style>
+
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+</Application>

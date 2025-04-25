@@ -1,0 +1,87 @@
+﻿<Window x:Class="fitness.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Авторизация" 
+        Width="400"
+        Height="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <materialDesign:Card Padding="16" Margin="0 20 0 20"
+                               Background="{StaticResource PrimaryHueLightBrush}">
+                <StackPanel>
+                    <TextBlock Text="Фитнес-клуб" 
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 20"
+                        Foreground="White"
+                               
+                               />
+                    
+                    <TextBlock Text="Логин" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                        Foreground="White"
+                               
+                               />
+                    
+                    <TextBox x:Name="LoginTextBox"
+                             Background="White"
+                             Margin="0 0 0 10"
+                             FontSize="16"
+                             Foreground="{StaticResource PrimaryHueMidBrush}"
+                             
+                             Padding="8"/>
+                    
+                    <TextBlock Text="Пароль" 
+                               Margin="0 10 0 5"
+                               FontSize="18"
+                        Foreground="White"
+                               
+                               />
+
+                    <TextBox x:Name="VisiblePasswordBox"
+                         Visibility="Collapsed"
+                         Background="White"
+                         Margin="0 0 0 0"
+                         FontSize="16"
+                         Foreground="{StaticResource PrimaryHueMidBrush}"
+                         Padding="8"/>
+
+                    <!-- PasswordBox для скрытого ввода -->
+                    <PasswordBox x:Name="PasswordBox"
+                         Background="White"
+                         Margin="0 0 0 0"
+                         FontSize="16"
+                         Foreground="{StaticResource PrimaryHueMidBrush}"
+                         Padding="8"/>
+                    <ToggleButton x:Name="ShowPasswordButton"
+                      Width="30" Height="30"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="0 0 5 20"
+                      Checked="ShowPasswordButton_Checked"
+                      Unchecked="ShowPasswordButton_Unchecked">
+                        <materialDesign:PackIcon x:Name="EyeIcon" Kind="Eye" VerticalAlignment="Center"/>
+                    </ToggleButton>
+
+                    <Button x:Name="LoginButton" 
+                            Content="Войти" 
+                            Margin="0 20 0 0"
+                            FontWeight="Bold"
+                            FontSize="18"
+                            Height="40"
+                            Click="LoginButton_Click"/>
+
+                </StackPanel>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Window>
